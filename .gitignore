@@ -1,0 +1,27 @@
+# Ignore Python cache and environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+env/
+venv/
+
+# Ignore Flutter
+flutter_app/build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.flutter-*
+pubspec.lock
+
+# Ignore Next.js
+nextjs_app/.next/
+nextjs_app/node_modules/
+
+# VS Code
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
