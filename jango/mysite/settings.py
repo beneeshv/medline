@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',  # Add this for token authentication
+    
 ]
 
 MIDDLEWARE = [

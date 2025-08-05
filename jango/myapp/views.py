@@ -192,3 +192,26 @@ def doctor_login(request):
             return Response({'success': False, 'message': 'Invalid password'}, status=401)
     except Doctor.DoesNotExist:
         return Response({'success': False, 'message': 'Doctor not found'}, status=404)
+    
+
+# views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Doctor
+from .serializers import DoctorSerializer
+
+class DoctorListAPIView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        doctors = Doctor.objects.all()
+        serializer = DoctorSerializer(doctors, many=True)
+        return Response(serializer.data)
+    
+from rest_framework import generics
+    
+class DoctorDetailView(generics.RetrieveAPIView):
+    permission_classes = [AllowAny]
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+
+

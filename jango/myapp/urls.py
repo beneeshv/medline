@@ -10,4 +10,6 @@ urlpatterns = [
     path('specializations/', views.get_specializations),
     path('add-doctor/', views.add_doctor),
     path('api/doctor/login/', views.doctor_login),
+    path('api/doctors/', views.DoctorListAPIView.as_view(), name='doctor_list'),
+    path('api/doctors/<int:pk>/', views.DoctorDetailView.as_view(), name='doctor_detail'),
 ]

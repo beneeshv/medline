@@ -86,8 +86,8 @@ export default function Home() {
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-medixBlue">
-              ABOUT US
+            <a href="/user/doctor_details" className="hover:text-medixBlue">
+              DOCTOR
             </a>
           </li>
           <li>
@@ -106,7 +106,7 @@ export default function Home() {
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-medixBlue">
+            <a href="/user/appointment" className="hover:text-medixBlue">
               APPOINTMENT
             </a>
           </li>
