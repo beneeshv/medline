@@ -12,7 +12,7 @@ export default function DoctorPrescriptions() {
   const [selectedAppointment, setSelectedAppointment] = useState('');
   const [medications, setMedications] = useState('');
   const [instructions, setInstructions] = useState('');
-  
+
   // --- STATE SIMPLIFIED FOR BILL ---
   const [consultationFee, setConsultationFee] = useState(0);
   const [notes, setNotes] = useState('');
@@ -43,7 +43,7 @@ export default function DoctorPrescriptions() {
           return;
         }
 
-        const response = await axios.get(`http://localhost:8000/appointments/doctor/${doctorId}/`);
+        const response = await axios.get(`http://localhost:8000/api/doctor/${doctorId}/appointments/`);
         const completedAppointments = response.data.filter(app => app.status === 'Completed');
         setAppointments(completedAppointments);
         setLoading(false);
@@ -110,7 +110,7 @@ export default function DoctorPrescriptions() {
         notes
       });
       setSuccess('Bill sent successfully!');
-      
+
       setConsultationFee(0);
       setNotes('');
     } catch (err) {
@@ -171,10 +171,10 @@ export default function DoctorPrescriptions() {
 
           {/* Navigation Tabs */}
           <div className="bg-teal-100 px-6 py-3 flex space-x-6 border-b border-teal-200">
-            <Link href="/doctor/home" className="text-teal-800 hover:text-teal-600 font-medium">Dashboard</Link>
-            <Link href="/doctor/appointments" className="text-teal-800 hover:text-teal-600 font-medium">Appointments</Link>
-            <Link href="/doctor/appointmentstatus" className="text-teal-800 hover:text-teal-600 font-medium">Update Status</Link>
-            <Link href="/doctor/prescriptions" className="text-teal-900 font-bold border-b-2 border-teal-600">Prescriptions & Bills</Link>
+            <Link href="/doctor/home" className="text-black hover:text-teal-600 font-medium">Dashboard</Link>
+            <Link href="/doctor/appointments" className="text-black hover:text-teal-600 font-medium">Appointments</Link>
+            <Link href="/doctor/appointmentstatus" className="text-black hover:text-teal-600 font-medium">Update Status</Link>
+            <Link href="/doctor/prescriptions" className="text-black font-bold border-b-2 border-teal-600">Prescriptions & Bills</Link>
           </div>
 
           {/* Content */}
@@ -196,23 +196,23 @@ export default function DoctorPrescriptions() {
             {loading ? (
               <div className="text-center py-12">
                 <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-teal-600 mb-4"></div>
-                <p className="text-gray-600">Loading appointments...</p>
+                <p className="text-black">Loading appointments...</p>
               </div>
             ) : appointments.length === 0 ? (
               <div className="text-center py-12 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-black mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <p className="text-gray-600 mb-2">No completed appointments found</p>
-                <p className="text-gray-500 text-sm">You need completed appointments to create prescriptions or bills</p>
+                <p className="text-black mb-2">No completed appointments found</p>
+                <p className="text-black text-sm">You need completed appointments to create prescriptions or bills</p>
               </div>
             ) : (
               <div>
                 <div className="mb-6">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="appointment">Select Appointment</label>
+                  <label className="block text-black text-sm font-bold mb-2" htmlFor="appointment">Select Appointment</label>
                   <select
                     id="appointment"
-                    className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500"
                     value={selectedAppointment}
                     onChange={(e) => setSelectedAppointment(e.target.value)}
                   >
@@ -224,24 +224,24 @@ export default function DoctorPrescriptions() {
                 <div className="mb-6">
                   <div className="flex border-b border-gray-200">
                     <button
-                      className={`py-3 px-6 font-medium transition-colors ${activeTab === 'prescription' ? 'border-b-2 border-teal-500 text-teal-700' : 'text-gray-500 hover:text-teal-600'}`}
+                      className={`py-3 px-6 font-medium transition-colors ${activeTab === 'prescription' ? 'border-b-2 border-teal-500 text-black' : 'text-black hover:text-teal-600'}`}
                       onClick={() => setActiveTab('prescription')}
                     >
                       Prescription
                     </button>
                     <button
-                      className={`py-3 px-6 font-medium transition-colors ${activeTab === 'bill' ? 'border-b-2 border-teal-500 text-teal-700' : 'text-gray-500 hover:text-teal-600'}`}
+                      className={`py-3 px-6 font-medium transition-colors ${activeTab === 'bill' ? 'border-b-2 border-teal-500 text-black' : 'text-black hover:text-teal-600'}`}
                       onClick={() => setActiveTab('bill')}
                     >
                       Bill
                     </button>
                   </div>
                 </div>
-                
+
                 {selectedAppointment && selectedAppointmentDetails && (
                   <div className="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h3 className="text-sm font-semibold text-gray-700 mb-2">Patient Information</h3>
-                    <div className="text-sm">
+                    <h3 className="text-sm font-semibold text-black mb-2">Patient Information</h3>
+                    <div className="text-sm text-black">
                       <p><span className="font-medium">Name:</span> {selectedAppointmentDetails.user?.name || 'Unknown'}</p>
                       <p><span className="font-medium">Appointment Date:</span> {selectedAppointmentDetails.date}</p>
                       <p><span className="font-medium">Appointment Time:</span> {selectedAppointmentDetails.time}</p>
@@ -253,11 +253,11 @@ export default function DoctorPrescriptions() {
                   <form onSubmit={handlePrescriptionSubmit} className="bg-white rounded-lg p-6 border border-gray-100">
                     {/* ... Prescription form remains the same ... */}
                     <div className="mb-5">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="medications">Medications *</label>
+                      <label className="block text-black text-sm font-bold mb-2" htmlFor="medications">Medications *</label>
                       <textarea id="medications" className="w-full bg-white border border-gray-300 rounded-md py-3 px-4" rows="4" placeholder="e.g., Paracetamol 500mg - 1 tablet every 6 hours" value={medications} onChange={(e) => setMedications(e.target.value)} required ></textarea>
                     </div>
                     <div className="mb-6">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="instructions">Instructions</label>
+                      <label className="block text-black text-sm font-bold mb-2" htmlFor="instructions">Instructions</label>
                       <textarea id="instructions" className="w-full bg-white border border-gray-300 rounded-md py-3 px-4" rows="3" placeholder="e.g., Take after meals, Avoid alcohol" value={instructions} onChange={(e) => setInstructions(e.target.value)} ></textarea>
                     </div>
                     <div className="flex items-center justify-end">
@@ -270,15 +270,15 @@ export default function DoctorPrescriptions() {
                   // --- BILL FORM SIMPLIFIED ---
                   <form onSubmit={handleBillSubmit} className="bg-white rounded-lg p-6 border border-gray-100">
                     <div className="mb-4">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="consultationFee">Consultation Fee (₹)</label>
+                      <label className="block text-black text-sm font-bold mb-2" htmlFor="consultationFee">Consultation Fee (₹)</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <span className="text-gray-500">₹</span>
+                          <span className="text-black">₹</span>
                         </div>
                         <input
                           id="consultationFee"
                           type="number" min="0"
-                          className="w-full bg-white border border-gray-300 rounded-md py-2 pl-8 pr-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                          className="w-full bg-white border border-gray-300 rounded-md py-2 pl-8 pr-3 text-black focus:outline-none focus:ring-2 focus:ring-teal-500"
                           value={consultationFee}
                           onChange={(e) => setConsultationFee(Number(e.target.value))}
                         />
@@ -286,10 +286,10 @@ export default function DoctorPrescriptions() {
                     </div>
                     {/* --- ALL OTHER CHARGE INPUTS REMOVED --- */}
                     <div className="mb-6">
-                      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="notes">Notes</label>
+                      <label className="block text-black text-sm font-bold mb-2" htmlFor="notes">Notes</label>
                       <textarea
                         id="notes"
-                        className="w-full bg-white border border-gray-300 rounded-md py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="w-full bg-white border border-gray-300 rounded-md py-3 px-4 text-black focus:outline-none focus:ring-2 focus:ring-teal-500"
                         rows="3"
                         placeholder="Additional notes about the bill"
                         value={notes}
@@ -299,7 +299,7 @@ export default function DoctorPrescriptions() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200">
                       {/* --- TOTAL CALCULATION SIMPLIFIED --- */}
-                      <div className="text-xl font-bold text-teal-800 mb-4 sm:mb-0">
+                      <div className="text-xl font-bold text-black mb-4 sm:mb-0">
                         Total: ₹{consultationFee.toFixed(2)}
                       </div>
                       <button
@@ -307,7 +307,7 @@ export default function DoctorPrescriptions() {
                         className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 flex items-center"
                         disabled={submitting}
                       >
-                         {submitting ? 'Sending...' : 'Send Bill'}
+                        {submitting ? 'Sending...' : 'Send Bill'}
                       </button>
                     </div>
                   </form>

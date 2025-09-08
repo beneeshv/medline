@@ -37,7 +37,7 @@ export default function UpdateStatus() {
           return;
         }
 
-        const response = await axios.get(`http://localhost:8000/appointments/doctor/${doctorId}/`);
+        const response = await axios.get(`http://localhost:8000/api/doctor/${doctorId}/appointments/`);
         setAppointments(response.data);
       } catch (err) {
         console.error('Error fetching appointments:', err);

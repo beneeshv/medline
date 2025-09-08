@@ -67,9 +67,12 @@ export default function UserAppointments() {
                     {/* Navigation Tabs */}
                     <nav className="border-b border-gray-200">
                         <ul className="flex">
-                            <li><Link href="/user/dashboard" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">Dashboard</Link></li>
-                            <li><Link href="/user/appointment" className="inline-block p-4 font-semibold text-teal-600 border-b-2 border-teal-600">Book Appointment</Link></li>
-                            <li><Link href="/user/appointments" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">My Appointments</Link></li>
+                            <li><Link href="/" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">Home</Link></li>
+                            <li><Link href="/user/appointment" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">Book Appointment</Link></li>
+                            <li><Link href="/user/appointments" className="inline-block p-4 font-semibold text-teal-600 border-b-2 border-teal-600">My Appointments</Link></li>
+                            <li><Link href="/user/prescriptions" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">My Prescriptions</Link></li>
+                            <li><Link href="/user/bills" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">My Bills</Link></li>
+                            <li><Link href="/user/account" className="inline-block p-4 text-black hover:text-black hover:border-b-2 hover:border-black">My Account</Link></li>
                         </ul>
                     </nav>
 

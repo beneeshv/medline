@@ -18,6 +18,25 @@ const EmailIcon = () => (
     </svg>
 );
 
+// Helper function to get specialty colors
+const getSpecialtyColors = (specialty) => {
+    if (!specialty || typeof specialty !== 'string') { return 'bg-gray-100 text-gray-800'; }
+    const s = specialty.toUpperCase();
+    switch (s) {
+        case 'NEUROLOGIST': return 'bg-blue-100 text-blue-800';
+        case 'CARDIOLOGIST': return 'bg-pink-100 text-pink-800';
+        case 'DERMETOLOGY': return 'bg-indigo-100 text-indigo-800';
+        case 'GYNOCOLOGY': return 'bg-purple-100 text-purple-800';
+        case 'CARDIOLOGY': return 'bg-pink-100 text-pink-800';
+        case 'DERMATOLOGY': return 'bg-indigo-100 text-indigo-800';
+        case 'GYNECOLOGY': return 'bg-purple-100 text-purple-800';
+        case 'ORTHOPEDIC': return 'bg-green-100 text-green-800';
+        case 'PEDIATRICS': return 'bg-yellow-100 text-yellow-800';
+        case 'PSYCHIATRY': return 'bg-red-100 text-red-800';
+        default: return 'bg-gray-100 text-gray-800';
+    }
+};
+
 export default function DoctorDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -97,12 +116,15 @@ export default function DoctorDetailPage() {
           <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-shrink-0 text-center md:text-left md:w-1/3">
               <img
-                src={doctor.image ? `http://localhost:8000${doctor.image}` : `https://i.pravatar.cc/150?u=${doctor.id}`}
+                src={doctor.image ? `http://localhost:8000${doctor.image}` : `https://i.pravatar.cc/200?u=${doctor.id}`}
                 alt={doctor.name}
-                className="w-40 h-40 rounded-full object-cover border-4 border-[var(--apollo-light)] shadow-md mx-auto"
+                className="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg mx-auto ring-2 ring-blue-200"
               />
               <h1 className="text-3xl font-bold mt-4 text-blue-600">{doctor.name}</h1>
-              <p className="text-blue-500 font-semibold text-lg">{doctor.specialization}</p>
+              {/* Specialization Pill */}
+              <div className={`mt-3 inline-block px-4 py-2 rounded-full text-sm font-semibold ${getSpecialtyColors(doctor.specialization)}`}>
+                {doctor.specialization || 'General Practice'}
+              </div>
               <div className="mt-4 space-y-2 text-left">
                   <div className="flex items-center gap-3"> <PhoneIcon /> <span className="text-gray-700">{doctor.number}</span> </div>
                   <div className="flex items-center gap-3"> <EmailIcon /> <span className="text-gray-700">{doctor.email}</span> </div>

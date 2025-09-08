@@ -34,25 +34,15 @@ const DoctorCard = ({ doctor }) => {
 
                     {/* Doctor Info */}
                     <h3 className="text-xl font-bold text-gray-800 mt-4">{doctor.name}</h3>
-                    <p className="text-gray-600 text-sm mt-1 text-center">{doctor.address || "1288 Natalie Brook Apt. 966"}</p>
+                    {doctor.description && (
+                        <p className="text-gray-600 text-sm mt-1 text-center line-clamp-2">
+                            {doctor.description}
+                        </p>
+                    )}
 
                     {/* Specialization Pill */}
                     <div className={`mt-4 px-4 py-1.5 rounded-full text-sm font-semibold ${specialtyColors}`}>
                         {doctor.specialization || 'General'}
-                    </div>
-                </div>
-
-                {/* Divider */}
-                <div className="border-t border-[var(--apollo-light)] my-5"></div>
-
-                {/* Actions */}
-                <div className="flex justify-around items-center text-gray-600">
-                    <div className="flex items-center space-x-2 text-sm">
-                        <span>Availability</span>
-                    </div>
-                    <div className="border-l border-gray-200 h-6"></div> {/* Vertical separator */}
-                    <div className="flex items-center space-x-2 text-sm">
-                        <span>Make a call</span>
                     </div>
                 </div>
             </div>
@@ -83,12 +73,12 @@ export default function DoctorsPage() {
             .catch(err => {
                 console.error('Error fetching doctors, falling back to dummy data:', err);
                 const fallbackData = [
-                    { id: 1, name: 'Dr. Topon Kumar', specialization: 'NEUROLOGIST' },
-                    { id: 2, name: 'Dr. Albert Miles', specialization: 'CARDIOLOGIST' },
-                    { id: 3, name: 'Dr. Null Specialization', specialization: null },
-                    { id: 4, name: 'Earl Hopkins', specialization: 'DERMETOLOGY' },
-                    { id: 5, name: 'Owen Larson', specialization: 'DERMETOLOGY' },
-                    { id: 6, name: 'Teresa Schwartz', specialization: 'GYNOCOLOGY' },
+                    { id: 1, name: 'Dr. Topon Kumar', specialization: 'NEUROLOGIST', description: "Dr. Kumar is a leading neurologist with over 15 years of experience in treating neurological disorders." },
+                    { id: 2, name: 'Dr. Albert Miles', specialization: 'CARDIOLOGIST', description: "Specializing in cardiac rhythm management and interventional cardiology." },
+                    { id: 3, name: 'Dr. Null Specialization', specialization: null, description: "A highly experienced practitioner dedicated to patient care." },
+                    { id: 4, name: 'Earl Hopkins', specialization: 'DERMETOLOGY', description: "Providing comprehensive care for all skin, hair, and nail conditions." },
+                    { id: 5, name: 'Owen Larson', specialization: 'DERMETOLOGY', description: "Focusing on cosmetic and medical dermatology with a holistic approach." },
+                    { id: 6, name: 'Teresa Schwartz', specialization: 'GYNOCOLOGY', description: "Expert in women's health, offering compassionate and personalized care for all stages of life." },
                 ];
                 setDoctors(fallbackData);
                 setFilteredDoctors(fallbackData);
@@ -98,11 +88,8 @@ export default function DoctorsPage() {
 
     // Get unique specializations for the filter dropdown
     const getUniqueSpecializations = () => {
-        console.log('Doctors data:', doctors); // Debug log
         const specializations = doctors
             .map(doctor => {
-                console.log('Doctor specialization:', doctor.specialization, typeof doctor.specialization); // Debug log
-                // Handle both string and object specializations
                 if (typeof doctor.specialization === 'string') {
                     return doctor.specialization;
                 } else if (doctor.specialization && typeof doctor.specialization === 'object' && doctor.specialization.name) {
@@ -112,7 +99,6 @@ export default function DoctorsPage() {
             })
             .filter(spec => spec && spec !== null && typeof spec === 'string')
             .map(spec => spec.toUpperCase());
-        console.log('Extracted specializations:', specializations); // Debug log
         return [...new Set(specializations)];
     };
 

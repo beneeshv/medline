@@ -104,11 +104,11 @@ def admin_login(request):
     password = request.data.get('password')
 
     # Hardcoded admin credentials
-    if username == 'admin' and password == 'admin123':
+    if username == 'beneesh' and password == '2310':
         return Response({
             "message": "Admin login successful",
-            "token": "dummy-token-for-testing"
-        })
+            "token": "admin-token-beneesh-2310"
+        }, status=200)
     else:
         return Response(
             {"error": "Invalid admin credentials"},
@@ -198,8 +198,8 @@ def doctor_login(request):
 # views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Doctor, Appointment, User
-from .serializers import DoctorSerializer, AppointmentSerializer
+from .models import Doctor, Appointment, User, Specialization
+from .serializers import DoctorSerializer, AppointmentSerializer, SpecializationSerializer
 
 class DoctorListAPIView(APIView):
     permission_classes = [AllowAny]
@@ -210,10 +210,15 @@ class DoctorListAPIView(APIView):
     
 from rest_framework import generics
     
-class DoctorDetailView(generics.RetrieveAPIView):
+class DoctorDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [AllowAny]
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+
+class SpecializationListAPIView(generics.ListAPIView):
+    permission_classes = [AllowAny]
+    queryset = Specialization.objects.all()
+    serializer_class = SpecializationSerializer
 
 # Appointment APIs
 @api_view(['POST'])
@@ -542,6 +547,11 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from .models import User
 from .serializers import UserSerializer
+
+class UserListAPIView(generics.ListAPIView):
+    permission_classes = [AllowAny]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class UserDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = [AllowAny]
